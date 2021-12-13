@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+<h1>{{main_header}}</h1>
+
+<span>{{welcome}}</span>
+<span>{{user}}</span>
+
+{%for i in items%}
+    {% if i.price > 5000 %}
+        <p style="color:red;" >{{i.name}}, {{i.price}}</p>
+    {% else %}
+        <p>{{i.name}}, {{i.price}}<br>
+    {%endif%}
+{%endfor%}
+
+</body>
+</html>
