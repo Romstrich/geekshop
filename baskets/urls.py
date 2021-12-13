@@ -17,17 +17,15 @@ from django.contrib import admin
 from django.urls import path
 #from django.conf import settings
 from django.conf.urls.static import static
+from baskets.views import basket_add, basket_remove
 
-from authapp.views import login,register,logout,profile
-
-app_name='authapp'
+app_name='baskets'
 
 urlpatterns = [
 
-    path('login/', login, name='login'),
-    path('register/',register,name='register'),
-    path('logout/',logout,name='logout'),
-    path('profile/',profile,name='profile')
+    path('basket_add/<int:id>/',basket_add, name='basket_add'),
+    path('remove/<int:basket_id>/',basket_remove, name='basket_remove'),
+
 
  ]
 

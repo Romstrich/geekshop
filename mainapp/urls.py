@@ -25,6 +25,7 @@ app_name='mainapp'
 urlpatterns = [
 
     path('products/', products, name='products'),
+
      #path('test/', test, name='test'),
  ]
 
