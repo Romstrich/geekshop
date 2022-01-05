@@ -2,6 +2,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from authapp.models import User
+from mainapp.models import Product_Category, Product
 from django.urls import reverse
 from admins.forms import UserAdminRegisterForm,UserAdminProfilerForm
 # Create your views here.
@@ -76,3 +77,17 @@ def admin_user_power_on(request,pk):
         user_selected.save()
 
     return HttpResponseRedirect(reverse('admins:admin_users'))
+
+def admin_products(request):
+    context = {
+        'title': 'Geekshop - Админ- | Продукты',
+        'products': Product.objects.all()
+    }
+    return render(request, 'admin-products-read.html', context)
+
+def admin_categories(request):
+    context = {
+        'title': 'Geekshop - Админ- | Категории',
+        'categories': Product_Category.objects.all()
+    }
+    return render(request, 'admin-categories-read.html', context)
