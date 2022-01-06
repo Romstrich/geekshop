@@ -1,14 +1,16 @@
-
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from authapp.models import User
+from mainapp.models import Product_Category, Product
 from django.urls import reverse
 from admins.forms import UserAdminRegisterForm,UserAdminProfilerForm
 # Create your views here.
-
+@user_passes_test(lambda u:u.is_superuser)
 def index(request):
     return render(request,'admin.html')
 
+@user_passes_test(lambda u:u.is_superuser)
 def admin_users(request):
     context={
         'title':'Geekshop - Админ- | Пользователи',
@@ -16,6 +18,7 @@ def admin_users(request):
     }
     return render(request,'admin-users-read.html',context)
 
+@user_passes_test(lambda u:u.is_superuser)
 def admin_user_create(request):
 
     if  request.method=='POST':
@@ -35,6 +38,7 @@ def admin_user_create(request):
     }
     return render(request,'admin-users-create.html',context)
 
+@user_passes_test(lambda u:u.is_superuser)
 def admin_user_update(request,pk):
     user_selected = User.objects.get(pk=pk)
     if request.method == 'POST':
@@ -62,6 +66,7 @@ def admin_user_delete(request,pk):
         ##user_selected.save()
     return HttpResponseRedirect(reverse('admins:admin_users'))
 
+@user_passes_test(lambda u:u.is_superuser)
 def admin_user_power_off(request,pk):
     user_selected=User.objects.get(pk=pk)
     if request.method=='POST':
@@ -69,6 +74,7 @@ def admin_user_power_off(request,pk):
         user_selected.save()
     return HttpResponseRedirect(reverse('admins:admin_users'))
 
+@user_passes_test(lambda u:u.is_superuser)
 def admin_user_power_on(request,pk):
     user_selected=User.objects.get(pk=pk)
     if request.method=='POST':
@@ -76,3 +82,19 @@ def admin_user_power_on(request,pk):
         user_selected.save()
 
     return HttpResponseRedirect(reverse('admins:admin_users'))
+
+@user_passes_test(lambda u:u.is_superuser)
+def admin_products(request):
+    context = {
+        'title': 'Geekshop - Админ- | Продукты',
+        'products': Product.objects.all()
+    }
+    return render(request, 'admin-products-read.html', context)
+
+@user_passes_test(lambda u:u.is_superuser)
+def admin_categories(request):
+    context = {
+        'title': 'Geekshop - Админ- | Категории',
+        'categories': Product_Category.objects.all()
+    }
+    return render(request, 'admin-categories-read.html', context)

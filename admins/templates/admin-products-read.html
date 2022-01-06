@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-
+{%load static%}
 {%block content%}
     <div id="layoutSidenav_content">
         <main>
@@ -15,46 +15,49 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Имя пользователя</th>
-                                    <th>Имя</th>
-                                    <th>Фамилия</th>
-                                    <th>Адрес эл. почты</th>
-                                    <th>Персонал сайта</th>
-                                    <th>Активный</th>
+                                    <th>Название</th>
+                                    <th>Картинка</th>
+                                    <th>Описание</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Категория</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Имя пользователя</th>
-                                    <th>Имя</th>
-                                    <th>Фамилия</th>
-                                    <th>Адрес эл. почты</th>
-                                    <th>Персонал сайта</th>
-                                    <th>Активный</th>
+                                    <th>Название</th>
+                                    <th>Картинка</th>
+                                    <th>Описание</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Категория</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                {% for user in users%}
+                                {% for product in products%}
                                 <tr>
-                                    <th><a href="{%url 'admins:admin_user_update' user.id %}" style="color: dodgerblue">{{user.username}}</a></th>
-                                    <th>{{user.first_name}}</th>
-                                    <th>{{user.last_name}}</th>
-                                    <th>{{user.email}}</th>
+                                    <th><a href="#" style="color: dodgerblue">{{product.name}}</a></th>
+                                    <th><img  height="50" src="{{product.image.url}}"></th>
+<!--                                    <th>{{product.image.url}}</th>-->
+                                    <th>{{product.description}}</th>
+                                    <th>{{product.price}}</th>
+                                    <th>{{product.quantity}}</th>
+                                    <th>{{product.category}}</th>
 
-                                    <td class="text-center">
-                                        {% if user.is_staff%}
-                                        <i class="fas fa-check-circle"></i>
-                                        {%else%}
-                                        <i class="fas fa-times-circle"></i>
-                                        {%endif%}
-                                    </td>
-                                    <td class="text-center">
-                                        {% if user.is_active%}
-                                        <i class="fas fa-check-circle"></i>
-                                        {%else%}
-                                        <i class="fas fa-times-circle"></i>
-                                        {%endif%}
-                                    </td>
+<!--                                    <td class="text-center">-->
+<!--                                        {% if user.is_staff%}-->
+<!--                                        <i class="fas fa-check-circle"></i>-->
+<!--                                        {%else%}-->
+<!--                                        <i class="fas fa-times-circle"></i>-->
+<!--                                        {%endif%}-->
+<!--                                    </td>-->
+<!--                                    <td class="text-center">-->
+<!--                                        {% if user.is_active%}-->
+<!--                                        <i class="fas fa-check-circle"></i>-->
+<!--                                        {%else%}-->
+<!--                                        <i class="fas fa-times-circle"></i>-->
+<!--                                        {%endif%}-->
+<!--                                    </td>-->
                                 </tr>
                                 {%endfor%}
 <!--                                <tr>-->
@@ -78,8 +81,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{%url 'admins:admin_user_create'%} ">
-                            <button class="btn btn-success">Создать пользователя</button>
+                        <a href="# ">
+                            <button class="btn btn-success">Создать продукт</button>
                         </a>
                     </div>
                 </div>
